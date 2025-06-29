@@ -13,7 +13,7 @@ Ce projet implémente les fonctionnalités de base d'un système bancaire inclua
 
 ## Interface Publique
 
-L'interface `AccountService` implémente l'interface publique suivante :
+La classe `AccountManager` implémente l'interface publique suivante :
 
 ```java
 public interface AccountService {
