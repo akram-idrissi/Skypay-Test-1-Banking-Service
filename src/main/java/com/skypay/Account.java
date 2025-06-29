@@ -6,6 +6,7 @@ import lombok.Getter;
 public class Account {
 
     private final AccountService accountService;
+
     @Getter
     private int balance = 0;
 
