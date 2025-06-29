@@ -7,6 +7,8 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import static org.junit.Assert.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -76,13 +78,19 @@ public class AccountTest {
 
             account.printStatement();
 
-            String expectedOutput =
-                    """
-                            Date || Amount || Balance
-                            27/06/2025 || -500 || 2500
-                            27/06/2025 || 2000 || 3000
-                            27/06/2025 || 1000 || 1000
-                            """;
+            LocalDate today = LocalDate.now();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+            String formattedDate = today.format(formatter);
+
+            String expectedOutput = String.format(
+                """
+                Date || Amount || Balance
+                %s || -500 || 2500
+                %s || 2000 || 3000
+                %s || 1000 || 1000
+                """,
+                    formattedDate, formattedDate, formattedDate);
 
             String actualOutput = outContent.toString();
 
@@ -96,7 +104,13 @@ public class AccountTest {
         }
     }
 
-    // Helper method to get balance from AccountManager through reflection or if you expose a getter
+    public void integrationTest_multipleOperations() {
+        account.deposit(1000);
+        account.withdraw(200);
+        account.deposit(500);
+        assertEquals(1300, getBalance());
+    }
+
     private int getBalance() {
         return account.getBalance();
     }
