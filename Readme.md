@@ -36,13 +36,11 @@ public interface AccountService {
 
 **Alors** il devrait voir un relevé formaté avec toutes les transactions et les soldes mis à jour
 
-## Exigences Techniques
+## Les exigences fonctionnelles
 
-### Gestion des Erreurs
 - Validation des montants (pas de montants négatifs)
 - Vérification du solde suffisant pour les retraits
-- Validation du format de date
-- Gestion des entrées nulles ou invalides
+- Gestion des entrées invalides
 
 ### Contraintes
 - **Pas de repositories** : Utilisation exclusive d'`ArrayList`
